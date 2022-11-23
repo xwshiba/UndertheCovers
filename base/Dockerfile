@@ -93,8 +93,8 @@ RUN if [[ -n "${GDB_BUILD_SRC}" ]] ; then \
     fi 
 
 # copy overrides.json
-COPY settings ${CONDA_DIR}/share/jupyter/lab/settings
-RUN fix-permissions ${CONDA_DIR}/share/jupyter/lab/settings
+# COPY settings ${CONDA_DIR}/share/jupyter/lab/settings
+# RUN fix-permissions ${CONDA_DIR}/share/jupyter/lab/settings
 
 USER root
 
@@ -165,14 +165,11 @@ ARG CHOWN_HOME_OPTS="-R"
 ARG CHOWN_EXTRA_OPTS='-R'
 ARG CHOWN_EXTRA="/home/aarch64vm /home/RISE ${CONDA_DIR}"
 ENV OPE_UID=${OPE_UID}
-ARG NB_UID=${OPE_UID}
-ENV NB_UID=${NB_UID}
+ENV NB_UID=${OPE_UID}
 ENV OPE_GID=${OPE_GID}
-ARG NB_GID=${OPE_GID}
-ENV NB_GID=${NB_GID}
+ENV NB_GID=${OPE_GID}
 ENV OPE_GROUP=${OPE_GROUP}
-ARG NB_GROUP=${OPE_GROUP}
-ENV NB_GROUP=${NB_GROUP}
+ENV NB_GROUP=${OPE_GROUP}
 
 # # use built in startup script to setup new user home
 RUN /usr/local/bin/start.sh true; \
